@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple To-Do List</title>
+    <style>
+        #myInput {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+        .todo {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        .todo li {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #bbb;
+            margin-bottom: 5px;
+        }
+        .checked {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <h2>My To-Do List</h2>
+    <input type="text" id="myInput" placeholder="Title...">
+    <span onclick="newElement()" class="addBtn">Add</span>
+    <ul id="myUL" class="todo"></ul>
+
+    <script>
+        function newElement() {
+            var li = document.createElement("li");
+            var inputValue = document.getElementById("myInput").value;
+            var t = document.createTextNode(inputValue);
+            li.appendChild(t);
+            if (inputValue === '') {
+                alert("You must write something!");
+            } else {
+                document.getElementById("myUL").appendChild(li);
+            }
+            document.getElementById("myInput").value = "";
+
+            li.onclick = function() {
+                this.classList.toggle('checked');
+            }
+
+            var span = document.createElement("SPAN");
+            var txt = document.createTextNode("\u00D7");
+            span.className = "close";
+            span.appendChild(txt);
+            li.appendChild(span);
+
+            span.onclick = function() {
+                var div = this.parentElement;
+                div.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
